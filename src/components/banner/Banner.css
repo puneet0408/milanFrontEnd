@@ -1,0 +1,71 @@
+.banner
+{
+    background: url('../../static/background/banner.png');
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 160px 0px;
+}
+.data
+{
+    text-align: center;
+}
+.form
+{
+    height:420px;
+    background: #fff;
+    padding: 23px 0px 60px;
+    border-radius: 30px;
+}
+.data h1 
+{
+    font-size: 215%;
+    line-height: 100%;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.image
+{
+    position: absolute;
+    top: 20%;
+    left: 30%;
+}
+@keyframes leftRight {
+    0% {
+              transform: translateX(0px);
+    }
+    50% {
+              transform: translateX(-15px);
+    }
+    100% {
+              transform: translateX(0px);
+    }
+  }
+@keyframes topDown {
+    0%
+    {
+        transform: translateY(0px);
+    }
+    50%
+    {
+        transform: translateY(-15px);
+    }
+    100%
+    {
+        transform: translateY(0px);
+    }
+}
+.img1
+{
+    animation: leftRight 5s linear infinite;
+}
+.img2
+{
+    position: absolute;
+    left: 25%;
+    top: 75%;
+    animation: topDown 5s linear infinite;
+
+}
