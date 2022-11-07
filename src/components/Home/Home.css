@@ -4,7 +4,7 @@
     position: relative;
     background-repeat: no-repeat;
     background-size: cover;
-    padding-top: 190px;
+    padding-top: 100px;
     padding-bottom: 20px    ;
 }
 .data
@@ -74,7 +74,6 @@
 }
 .input_field p 
 {
-    font-size: 18px;
     line-height: 28px;
     font-weight: 500;
     padding: 10px 20px 10px 0px;
@@ -125,6 +124,13 @@
     {
         position: absolute;
         top: 20%;
-        left: 30%;
+        right: 0%;
+    }
+}
+@media only screen and (min-width: 992px)
+{
+    .banner
+    {
+        padding-top: 190px;
     }
 }
