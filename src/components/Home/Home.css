@@ -30,12 +30,6 @@
     text-align: center;
     margin-bottom: 15px;
 }
-.image
-{
-    position: absolute;
-    top: 20%;
-    left: 30%;
-}
 @keyframes leftRight {
     0% {
               transform: translateX(0px);
@@ -67,9 +61,7 @@
 }
 .img2
 {
-    position: absolute;
-    left: 25%;
-    top: 75%;
+    
     animation: topDown 5s linear infinite;
 
 }
@@ -120,4 +112,19 @@
 .input_field a
 {
     margin: auto;
+}
+/* Responsive Design */
+@media only screen and (min-width: 1000px) {
+    .img2
+    {
+        position: absolute;
+        left: 25%;
+        top: 75%;
+    }
+    .image
+    {
+        position: absolute;
+        top: 20%;
+        left: 30%;
+    }
 }
