@@ -97,7 +97,7 @@
     cursor: pointer;
     font-weight: 300;
 }
-.form .custom_btn
+.custom_btn
 {
     border-radius: 20px;
     background-image: linear-gradient(170deg, rgb(242, 40, 118) 0%, rgb(148, 45, 217) 100%);

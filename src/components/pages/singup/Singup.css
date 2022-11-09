@@ -5,7 +5,8 @@
 {
     color: #3b368c;
     margin-top: 70px;
-    /* overflow-y: scroll; */
+    height: 80vh;
+    padding-right: 30px;
 }
 .sing_form h2
 {
@@ -43,10 +44,48 @@
 {
     display: none;
 }
+.acc_btn
+{
+    width: 50%;
+    margin-left: 20%;
+    font-size: small;
+    padding: 10px 15px;
+    text-align: center;
+}
+/* width */
+.sing_form::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  .sing_form::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  .sing_form::-webkit-scrollbar-thumb {
+    background: rgb(11, 161, 180); 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  .sing_form::-webkit-scrollbar-thumb:hover {
+    background: #b30000; 
+  }
 @media only screen and (min-width: 992px)
 {
     .image_sing
     {
         display: block;
+    }
+    .sing_form
+    {
+        overflow-y: scroll;
+    }
+    .acc_btn
+    {
+        font-size: 16px;
+        padding: 15px 50px;
     }
 }
