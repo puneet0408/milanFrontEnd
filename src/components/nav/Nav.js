@@ -15,6 +15,7 @@ const Nav = () =>
                         <li><Link to="/community">COMMUNITY</Link></li>
                         <li><Link to="/membership">MEMBERSHIP</Link></li>
                         <li><Link to="/life">LIFE</Link></li>
+                        <li><Link to="/chat">CHAT</Link></li>
                         <li><Link to="/profile" style={{padding:"3px 2px"}}><img src={logo} /></Link></li>
                     </ul>
             </div>

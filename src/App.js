@@ -9,6 +9,7 @@ import Life from './components/pages/life/Life';
 import Shop from './components/pages/shop/Shop';
 import Profile from './components/pages/profile/Profile';
 import Singup from './components/pages/singup/Singup';
+import Chat  from './components/Chat/Chat';
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,7 @@ function App() {
       <Route path='/shop' element={<Shop/>}/>
       <Route path='/profile' element={<Profile/>}/>
       <Route path='/singup' element={<Singup/>}/>
+      <Route path='/chat' element={<Chat/>}></Route>
     </Routes>
     </BrowserRouter>
   );
