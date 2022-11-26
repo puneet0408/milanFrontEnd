@@ -12,8 +12,8 @@ let Chat = () =>
         {
             auth:
             {
-              userid:'637b4e231a68c0c26f074a85',
-              token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzN2I0ZTIzMWE2OGMwYzI2ZjA3NGE4NSIsImlhdCI6MTY2OTM2OTAxM30.97GviejQ2GU6NG7XRff9fxXOSByu-anZvSJ5AQ0-_zM'
+              userid: localStorage.getItem('id'),
+              token: localStorage.getItem('token')
             }        
         });
         setSocket(newsocket);
