@@ -8,7 +8,14 @@ let Chat = () =>
 
     useEffect(() => 
     {
-        const newsocket = io("127.0.0.1:4000");
+        const newsocket = io("127.0.0.1:4000",
+        {
+            auth:
+            {
+              userid:'637b4e231a68c0c26f074a85',
+              token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzN2I0ZTIzMWE2OGMwYzI2ZjA3NGE4NSIsImlhdCI6MTY2OTM2OTAxM30.97GviejQ2GU6NG7XRff9fxXOSByu-anZvSJ5AQ0-_zM'
+            }        
+        });
         setSocket(newsocket);
         return () => 
         {
@@ -17,8 +24,14 @@ let Chat = () =>
     },[setSocket]);
     const testing = ()=> 
     {
-        socket.emit('join_all_rooms','637b47dc51126d4f5d350d78');
+        // socket.emit('join_all_rooms','637b4e231a68c0c26f074a85');
+        // socket.emit('create_message','637b4e231a68c0c26f074a85','637b4de71a68c0c26f074a83','Hii Brother');
+        // socket.emit('unseen_message','637b47dc51126d4f5d350d78','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzN2I0N2RjNTExMjZkNGY1ZDM1MGQ3OCIsImlhdCI6MTY2OTI2NjAyOH0.w8-OpdEvMAf-zEM8762dph9l6c-_UFS94YYzQ3KRyKo');
     }
+    // socket.on('new_message',(msg)=>
+    // {
+    //     console.log(msg);
+    // });
     return (<div>
         { socket ? (
         <div className="chat-container">
