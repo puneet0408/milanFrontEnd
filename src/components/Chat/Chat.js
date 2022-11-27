@@ -1,11 +1,16 @@
 import { React,useState,useEffect,useCallback } from "react"
+import {useDispatch,useSelector} from "react-redux"
+import {login,logout} from "../../store/login/login"
 import {Link} from 'react-router-dom'
 import {io} from 'socket.io-client'
 import './Chat.css'
 let Chat = () => 
 {
-    const [socket,setSocket] = useState(null);
+    //Redux Use redux react toolkit
+    const islogin = useSelector((state)=> state.login.value);
+    const dispatch = useDispatch();
 
+    const [socket,setSocket] = useState(null);
     useEffect(() => 
     {
         const newsocket = io("127.0.0.1:4000",
@@ -43,6 +48,9 @@ let Chat = () =>
       ) : (
         <div>Not Connected</div>
       )}
+      {islogin?<div>you logged in</div>:<div>Logged Out</div>} 
+      <button onClick={()=> {dispatch(login())}}>Login</button>
+      <button onClick={()=> {dispatch(logout())}}>Logout</button>
     </div>);
 }
 export default Chat;
