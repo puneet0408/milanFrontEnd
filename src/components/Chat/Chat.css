@@ -22,3 +22,33 @@
     display: flex;
     justify-content: space-between;
 }
+.chat_details
+{
+    height: 100%;
+    border: 2px solid black;
+}
+.send_message {
+    display: flex;
+}
+.send_message input
+{
+    flex: 5;
+}
+.send_message button
+{
+    flex: 1;
+}
+.oldchat
+{
+    height: 70vh;
+    overflow-y: scroll;
+}
+.msg_container
+{
+    display: flex;
+    padding: 10px;
+}
+.right
+{
+    justify-content: flex-end;
+}

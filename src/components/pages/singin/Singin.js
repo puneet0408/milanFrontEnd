@@ -27,6 +27,7 @@ const Singin = () =>
                 localStorage.setItem("token",response.data.token);
                 localStorage.setItem("name",response.data.name);
                 localStorage.setItem("role",response.data.role);
+                localStorage.setItem("Chats",JSON.stringify(response.data.Chats));
             })
             .catch(function (error) {
             console.log(error);
