@@ -131,10 +131,9 @@ let Chat = () => {
   }
 
   //Litening for New Message
-  socket && socket.on('new_message',(msg)=> 
+  socket && socket.on('new_message',(ms)=> 
   {
-      setMessages([...messages,msg]);
-      setMsg("");
+      setMessages([...messages,ms]);
   });
 
 
