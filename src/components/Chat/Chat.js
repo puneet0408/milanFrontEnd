@@ -1,6 +1,7 @@
 import { React, useState, useEffect, useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { login, logout } from "../../store/login/login"
+import {make_connection,close_connecton} from "../../store/socket/socket"
 import { json, Link } from 'react-router-dom'
 import { io } from 'socket.io-client'
 import axios from "axios"
@@ -9,11 +10,17 @@ let Chat = () => {
   //Redux Use redux react toolkit
   const islogin = useSelector((state) => state.login.value);
   const dispatch = useDispatch();
+
+  //tempraoray testing
+
+
   const [socketid,setSocketid] = useState({});
   const [socket, setSocket] = useState(null);
   const [chats, setChats] = useState([]);
   const [messages,setMessages] = useState([]);
   const [reciver,setReciver] = useState('');
+  //Store State of Current Open Chat Id
+  const [openchatid,setOpencahtid] = useState('');
 
 
   //State for Chat Message Box
@@ -34,10 +41,22 @@ let Chat = () => {
         }
       });
     setSocket(newsocket);
+
+
+    //Close Connection on Leaving
     return () => {
       newsocket.close();
     }
   }, []);
+
+  useEffect(()=> 
+  {
+    console.log(socket);
+    let obj={name:"nikhil"}
+    console.log(obj);
+    dispatch(make_connection(socket))
+  },[socket]);
+
 
   //Fetch User (Friends List)
   useEffect(() => {
@@ -89,7 +108,7 @@ let Chat = () => {
   {
       return (
         //Set Class Based on (Message Varrible Vales)
-        <div className="msg_container">
+        <div className="msg_container" onClick={(ev)=> {mark_message(openchatid,message._id)}}>
           <div>
               <h4>{message.data}</h4>
               //show tick or dobule tick bases on (message.isseen values)
@@ -113,6 +132,7 @@ let Chat = () => {
   }
 
   const openMessageWindow = (event,rec) => {
+    setOpencahtid(socketid[rec]);
     socket.on('message',(data)=> 
     {
       setMessages(data.conversations);
@@ -135,6 +155,13 @@ let Chat = () => {
   {
       setMessages([...messages,ms]);
   });
+
+
+  //Testing Mark as seen Feature
+  const mark_message = (chatid,msgid) => 
+  {
+    socket.volatile.emit('mark_as_read',chatid,msgid);
+  }
 
 
   //Join All rooms
