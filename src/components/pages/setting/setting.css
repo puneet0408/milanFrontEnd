@@ -1,0 +1,100 @@
+ 
+
+ .profile-about-box .top-bg {
+    height: 160px;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: contain;
+}
+
+ .profile-about-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    -webkit-box-shadow: 0px 10px 5px 0px rgb(119 123 146 / 2%);
+    box-shadow: 0px 10px 5px 0px rgb(119 123 146 / 2%);
+    -webkit-transition: all ease 0.3s;
+    -o-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+}
+
+.editPageProfileImg{
+    width:10rem;
+    height: 10rem;
+    position: relative;
+    bottom: 5rem;
+}
+
+.editprofileImg{
+    width:100%;
+    height: 100%;
+    border-radius: 50%;
+
+}
+
+.profile-about-box  .profile-img .active-online {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #1ce36f;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    bottom: 9px;
+    right: 9px;
+}
+
+ .input-info-box {
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    -webkit-box-shadow: 0px 0px 40px 0px rgb(94 92 154 / 12%);
+    box-shadow: 0px 0px 40px 0px rgb(94 92 154 / 12%);
+    padding: 25px 30px 30px;
+    margin-top: 2rem;
+    color: #000;
+}
+
+ .input-info-box .headers {
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    margin-bottom: 20px;
+ }
+
+  .input-info-box .content .my-input-box {
+    margin-bottom: 30px;
+}
+
+ .input-info-box .content .my-input-box textarea {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    height: 120px;
+}
+ 
+ .input-info-box .content .my-input-box input {
+    height: 60px;
+    padding: 0px 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+ .input-info-box .content .my-input-box select {
+    height: 60px;
+    padding: 0px 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.buttons{
+    margin: 2rem;
+}
+
+ .buttons .custom-button2 {
+    display: inline-block;
+    padding: 11px 35px;
+    font-weight: 600;
+    width: auto;
+    border-radius: 50px;
+    margin-left: 20px;
+    height: auto;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+}

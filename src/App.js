@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from '../src/components/nav/Nav'
 import Home from './components/Home/Home'
 import Life from './components/pages/life/Life';
-import Shop from './components/pages/shop/Shop';
+import Setting from './components/pages/setting/setting';
 import Profile from './components/pages/profile/Profile';
 import Singup from './components/pages/singup/Singup';
 import Chat  from './components/Chat/Chat';
@@ -16,10 +16,9 @@ function App() {
     <BrowserRouter>
    <Nav/>
     <Routes>
-      
       <Route path='/' index element={<Home/>} />
       <Route path='/life' element={<Life/>}/>
-      <Route path='/shop' element={<Shop/>}/>
+      <Route path='/setting' element={<Setting/>}/>
       <Route path='/profile' element={<Profile/>}/>
       <Route path='/singup' element={<Singup/>}/>
       <Route path='/chat' element={<Chat/>}></Route>
