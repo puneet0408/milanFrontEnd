@@ -36,3 +36,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.bg-light {
+  --bs-bg-opacity: 1;
+  background-color: rgba(230,235,245,var(--bs-bg-opacity))!important;
+  background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+}
+

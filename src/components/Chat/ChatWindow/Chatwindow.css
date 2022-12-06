@@ -1,4 +1,8 @@
-.chatwindow
+.chatting_window
+{
+    color: black;
+}
+.chattop
 {
     display: flex;
     justify-content: space-between;
@@ -39,6 +43,8 @@ ul
 {
     display: flex;
     padding: 10px;
+    position: relative;
+    align-items: flex-end;
 }
 
 .chat_individual_message_text
@@ -56,9 +62,52 @@ ul
 {
     background-color: #7269ef;
     min-width: 150px;
-    height: 10px;
-}
+    height: 16px;
+    transform: rotate(352deg);
+    position: absolute;
+    left: 0px;
+    top: 54px;
 
+}
+.chat_photo
+{
+    background-color: red;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.chat
+{
+    overflow-y: auto;
+    max-height: 65vh;
+}
+.chatting_box form
+{
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+.chatting_box_text
+{
+    flex: 2;
+    padding: 10px;
+}
+.extra_option
+{
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+}
+.chat_right
+{
+    justify-content: flex-end;
+}
+.chat_text_contain
+{
+    position: relative;
+}
 p
 {
     margin: 0px;
