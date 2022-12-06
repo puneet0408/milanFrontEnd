@@ -1,7 +1,17 @@
 import { React, useState, useEffect, useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
+
+//Import Reducers Action
 import { login, logout } from "../../store/login/login"
-import { json, Link } from 'react-router-dom'
+import {make_connection,close_connecton} from "../../store/socket/socket"
+import {clear_messages,insert_new_messages} from "../../store/Messages/messages"
+import {set_contacts,clear_contacts} from "../../store/Users/users"
+import {clearTarget,setTarget} from "../../store/OpenChat/target"
+
+//Import Individual Componets
+import ChatWindow from './ChatWindow/Chatwindow'
+
+
 import { io } from 'socket.io-client'
 import axios from "axios"
 import './Chat.css'
@@ -9,12 +19,27 @@ let Chat = () => {
   //Redux Use redux react toolkit
   const islogin = useSelector((state) => state.login.value);
   const dispatch = useDispatch();
+
+  //Set Open Messages
+  let reducerMsgs = useSelector((state)=> state.messages.value)
+  
+
+
+
   const [socketid,setSocketid] = useState({});
   const [socket, setSocket] = useState(null);
   const [chats, setChats] = useState([]);
   const [messages,setMessages] = useState([]);
   const [reciver,setReciver] = useState('');
+  //Store State of Current Open Chat Id
+  const [openchatid,setOpencahtid] = useState('');
 
+  useEffect(()=>
+  {
+    console.log(chats);
+
+    dispatch(set_contacts(chats));
+  },[chats]);
 
   //State for Chat Message Box
   const [msg,setMsg] = useState("");
@@ -34,10 +59,18 @@ let Chat = () => {
         }
       });
     setSocket(newsocket);
+    dispatch(clear_messages());
+    //Close Connection on Leaving
     return () => {
       newsocket.close();
     }
   }, []);
+
+  useEffect(()=> 
+  {
+    dispatch(make_connection(socket))
+  },[socket]);
+
 
   //Fetch User (Friends List)
   useEffect(() => {
@@ -85,40 +118,46 @@ let Chat = () => {
   }
 
   //Individual Message 
-  const chat = (message) => 
-  {
-      return (
-        //Set Class Based on (Message Varrible Vales)
-        <div className="msg_container">
-          <div>
-              <h4>{message.data}</h4>
-              //show tick or dobule tick bases on (message.isseen values)
-          </div>
-        </div>
-      );
-  }
+  // const chat = (message) => 
+  // {
+  //     return (
+  //       //Set Class Based on (Message Varrible Vales)
+  //       <div className="msg_container" onClick={(ev)=> {mark_message(openchatid,message._id)}}>
+  //         <div>
+  //             <h4>{message.data}</h4>
+  //             //show tick or dobule tick bases on (message.isseen values)
+  //         </div>
+  //       </div>
+  //     );
+  // }
 
   //Chat Area
-  const userChats = (Chats) => 
-  {
-      return (<div className="chat_details">
-        <div className="oldchat">
-          {Chats.map(chat)}
-        </div>
-        <div className="send_message">
-          <input type="text" name="msg" onChange={handlechange}></input>
-          <button onClick={send_message}>Send Message</button>
-        </div>
-      </div>);
-  }
+  // const userChats = (Chats) => 
+  // {
+  //     return (<div className="chat_details">
+  //       <div className="oldchat">
+  //         {Chats.map(chat)}
+  //       </div>
+  //       <div className="send_message">
+  //         <input type="text" name="msg" onChange={handlechange}></input>
+  //         <button onClick={send_message}>Send Message</button>
+  //       </div>
+  //     </div>);
+  // }
 
   const openMessageWindow = (event,rec) => {
+    //Set Target User Details
+    let ob={id:rec,chatid:socketid[rec]};
+    dispatch(setTarget(ob));
+
+    setOpencahtid(socketid[rec]);
     socket.on('message',(data)=> 
     {
       setMessages(data.conversations);
+      dispatch(insert_new_messages(data.conversations))
       setReciver(rec);
     })
-    socket.emit('fetch_message_byid',socketid[rec],'2');
+    socket.emit('fetch_last_message',socketid[rec],'2');
     // socket.emit('create_message','637b4e231a68c0c26f074a85','637b4de71a68c0c26f074a83','Hii Brother');
     // socket.emit('unseen_message','637b47dc51126d4f5d350d78','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzN2I0N2RjNTExMjZkNGY1ZDM1MGQ3OCIsImlhdCI6MTY2OTI2NjAyOH0.w8-OpdEvMAf-zEM8762dph9l6c-_UFS94YYzQ3KRyKo');
   }
@@ -137,6 +176,13 @@ let Chat = () => {
   });
 
 
+  //Testing Mark as seen Feature
+  const mark_message = (chatid,msgid) => 
+  {
+    socket.volatile.emit('mark_as_read',chatid,msgid);
+  }
+
+
   //Join All rooms
   socket && chats.length>0 && socket.emit('join_all_rooms',localStorage.getItem('id'));
 
@@ -147,7 +193,8 @@ let Chat = () => {
           {chats.map(userDetails)}
         </div>
         <div className="col-md-6 col-sm-12">
-          {userChats(messages)}
+          {/* {userChats(messages)} */}
+          <ChatWindow/>
         </div>
       </div>
     </div>
