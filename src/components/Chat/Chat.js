@@ -1,5 +1,10 @@
 import { React, useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { AiOutlineSearch } from "react-icons/ai";
+
+import beforeLoginImg from "../../static/beforeLogin/chating.webp"
+
+import messageImg from "../../static/chats/avatar-2.feb0f89de58f0ef9b424.jpg";
 
 //Import Reducers Action
 import { login, logout } from "../../store/login/login";
@@ -17,7 +22,25 @@ import ChatWindow from "./ChatWindow/Chatwindow";
 import { io } from "socket.io-client";
 import axios from "axios";
 import "./Chat.css";
+import user_logo from "../../static/user.jpg";
+import { useNavigate } from "react-router-dom";
 let Chat = () => {
+
+
+
+
+  // login state 
+
+  const [isLogin, setIsLogin] = useState(true);
+
+  
+  const navigate = useNavigate();
+
+  function goToSignUpPage() {
+    navigate("/singup");
+  }
+
+
   //Redux Use redux react toolkit
   const islogin = useSelector((state) => state.login.value);
   const dispatch = useDispatch();
@@ -32,6 +55,8 @@ let Chat = () => {
   const [reciver, setReciver] = useState("");
   //Store State of Current Open Chat Id
   const [openchatid, setOpencahtid] = useState("");
+
+  
 
   useEffect(() => {
     console.log(chats);
@@ -94,21 +119,23 @@ let Chat = () => {
   //Helper Function that Return userDetails Window
   const userDetails = (user) => {
     return (
-      <div
-        className="user_details"
-        onClick={(event) => {
-          openMessageWindow(event, user._id);
-        }}
-      >
-        <div className="photo">
-          <img src={user.photo} />
-        </div>
-        <div className="user_details_name_time">
-          <div className="name">
-            <div>{user.name}</div>
-            <div>Time</div>
+      <div className="leftside">
+        <div
+          className="user_details"
+          onClick={(event) => {
+            openMessageWindow(event, user._id);
+          }}
+        >
+          <div className="messageImg">
+            <img src={messageImg} />
           </div>
-          <div className="last_message">hiii</div>
+          <div className="user_details_name_time">
+            <div className="name">
+              <div>{user.name}</div>
+              <div>time</div>
+            </div>
+            <div className="last_message">hiii</div>
+          </div>
         </div>
       </div>
     );
@@ -182,15 +209,57 @@ let Chat = () => {
 
   return (
     <div>
-      <div className="container-fluid chat-container">
-        <div className="row">
-          <div className="col-md-6 col-sm-12">{chats.map(userDetails)}</div>
-          <div className="col-md-6 col-sm-12">
-            {/* {userChats(messages)} */}
-            <ChatWindow />
+      {isLogin ? (
+        <div>
+          <div className="container-fluid chat-container">
+            <div className="row">
+              <div className="col-md-6 col-sm-12  chatList ">
+                <header classNmae="header_chat">
+                  <div className="userimg">
+                    <img src={user_logo} className="cover" />
+                    chats
+                  </div>
+                  <div class="search-box chat-search-box">
+                    <div class="mb-3 rounded-lg input-group input-group-lg">
+                      <span class="input-group-text text-muted bg-light pe-1 ps-3">
+                        <AiOutlineSearch />
+                      </span>
+                      <input
+                        placeholder="Search messages or users"
+                        type="text"
+                        class="form-control bg-light form-control"
+                        value=""
+                      />
+                      {/* 
+<input
+            value={msg}
+            type="text"
+            className="chatting_box_text bg-light"
+            placeholder="Enter message"
+            onChange={handlechange}
+          /> */}
+                    </div>
+                  </div>
+                </header>
+
+                <h2 className="recents">Recent</h2>
+
+                <div className="userDetails">{chats.map(userDetails)}</div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                {/* {userChats(messages)} */}
+                <ChatWindow />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="brforeLoginchat" >
+          <img  className="BeforeLoginImg" src={beforeLoginImg} alt="chatNow"/>
+          <button className="custom-button" onClick={goToSignUpPage} >join Now</button>
+        </div>
+      )}
     </div>
   );
 };

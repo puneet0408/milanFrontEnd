@@ -36,8 +36,8 @@ function Activity() {
         return(
             <div className="profile-single-post">
                 <div className="profileDetail" style={{ width:"50%", display:"flex",flexDrection:"row",color:"#000",alignItems:"center" , justifyContent:"space-between"}} >
-                <div className="profileImgContainer" style={{  width: "40px"}} >
-                                        <img src={ProfileImg} style={{width:"100%",objectFit:"cover"}} className="imgprofile" alt="profile"/>
+                <div className="profileImgContainer" style={{ height:"50px", width: "50px"}} >
+                                        <img src={ProfileImg} style={{hwidth:"100%",objectFit:"cover", height:"100%"}} className="imgprofile" alt="profile"/>
                                     </div>
                     <h3 className="name" >Puneet</h3>
                     <p className="userName" >@pvirmani</p>

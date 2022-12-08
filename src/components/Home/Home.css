@@ -113,6 +113,11 @@
     margin: auto;
 }
 
+.featurePageMargin{
+margin-top:10rem;
+margin-bottom: 5rem;
+}
+
 .feature-section {
     padding: 118px 0px 120px;
 }
@@ -440,3 +445,20 @@ img {
         padding-top: 190px;
     }
 }
+
+
+.matching{
+    background-color: #000;
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    color: #000;
+    box-shadow: inset 0 -3em 3em rgba(16, 9, 9, 0.1), 0 0 0 2px rgb(208, 198, 198),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    display: flex;
+    padding: 2rem !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+  }

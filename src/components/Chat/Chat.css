@@ -22,6 +22,15 @@
     display: flex;
     justify-content: space-between;
 }
+
+.userDetails{
+        background-color: #7e91b7;
+}
+
+
+ 
+ 
+ 
 .chat_details
 {
     height: 100%;
@@ -51,4 +60,58 @@
 .right
 {
     justify-content: flex-end;
+}
+.userimg{
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    
+
+}
+.cover{
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.header_chat{
+    background: grey;
+    height: 60px;
+    position: relative;
+    width: 100%;
+}
+
+.recents{
+    margin: 2rem 0;
+}
+
+.messageImg{
+    width:3rem;
+    
+}
+
+.messageImg img{
+    width: 100%;
+    border-radius: 50%;
+}
+
+.search-box{
+    width: 70%;
+}
+
+.brforeLoginchat{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.BeforeLoginImg{
+    position: absolute;
+    top: 0;
+    z-index: -2;
 }

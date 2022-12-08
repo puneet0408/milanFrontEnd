@@ -3,12 +3,32 @@ import logImg from "../../../static/singup/log.jpg";
 import axios from "axios";
 import "./singin.css";
 const Singin = () => {
-  let [FormData, setFormData] = useState();
-  let [error, setError] = useState();
+  let [FormData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+  let [error, setError] = useState({});
   let handleChange = (event) => {
     let { name, value } = event.target;
     setFormData({ ...FormData, [name]: value });
+
+    setError(validate(FormData));
+
   };
+
+  const validate = (values) => {
+    const error = {};
+    if (!values. username) {
+      error.username = "username is required";
+    }
+
+    else if (!(values.password)) {
+      error.password = "password is required";
+    }
+    
+    return error;
+  };
+
   //BackEnd API Call For Login
   var config = {
     method: "post",
@@ -64,15 +84,18 @@ const Singin = () => {
                     <label for="">Your Username</label>
                     <input
                       type="text"
+                      value={FormData.username}
                       onChange={handleChange}
                       class="my-form-control"
                       placeholder="Enter Your Email"
                       name="username"
                     />
                   </div>
+                  <p>{error.username}</p>
                   <div class="form-group">
                     <label for="">Password</label>
                     <input
+                      value={FormData.password}
                       type="password"
                       onChange={handleChange}
                       class="my-form-control"
@@ -80,6 +103,7 @@ const Singin = () => {
                       name="password"
                     />
                   </div>
+                  <p>{error.password}</p>
                   <p class="f-pass">Forgot your password?</p>
                   <div class="button-wrapper">
                     <button type="submit" class="custom-button">

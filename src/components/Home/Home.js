@@ -1,7 +1,13 @@
-import { React } from "react";
+import { React , useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import { AiFillFacebook } from 'react-icons/ai';
+import { motion } from "framer-motion"
+// import Man from "../../static/chats/";
+// import Women from "../../static/chats/woman.jpg";
+ 
+ 
+
 //Imports Images
 import img1 from "../../static/background/bannerfront.png";
 import img2 from "../../static/background/bannerlove.png";
@@ -30,13 +36,50 @@ import sucessp2 from "../../static/sucess/p2.png";
 import sucessp3 from "../../static/sucess/p3.png";
 
 const Home = () => {
+
+  const [isLogin,setIsLogin] = useState(true);
+
+// const matchFind = ()=>{
+//   return(
+//     <div className="matching" >
+//      <motion.div  animate={{left:"45%"}}
+//          transition={{
+//           duration: 4,
+//           delay: 0.2,
+// }}
+// initial={{left:0}}
+// className="obj1">
+//         <img src={Man} alt="men" />
+//         </motion.div>
+//       <motion.div  animate={{right:"45%"}}
+//          transition={{
+//           duration: 4,
+//           delay: 0.2,
+// }}
+// initial={{right:0}}
+//     className="obj2"  >
+//         <img src={Women} alt="Women" />
+//         </motion.div>
+//     </div>
+//   )
+  
+
+// }
+
   return (
     <div>
       <div className="banner">
         <div className="container">
           <div className="col-xl-4 col-lg-5 col-sm-12 data">
-            <h1>LOVE BEGINS LIFE BEGINS</h1>
-            <div className="form">
+            <motion.div animate={{opacity:1}} 
+          transition={{
+                    duration: 4,
+                    delay: 0.15,
+          }}
+         initial={{opacity:0}}>
+            <h1  >LOVE BEGINS LIFE BEGINS</h1>
+            </motion.div>
+            {isLogin?<button className="custom-button" >find your own Match</button>:   <div className="form">
               <form>
                 <div className="input_field">
                   <p>I am a : </p>
@@ -103,7 +146,8 @@ const Home = () => {
                   </Link>
                 </div>
               </form>
-            </div>
+            </div>}
+         
           </div>
           <div className="col-xl-8 col-lg-7 image">
             <img className="img1 img-fluid" src={img1} alt="fluid" />
@@ -112,7 +156,7 @@ const Home = () => {
         </div>
       </div>
       {/* --------------------feature page----------------- */}
-      <section className="feature-section">
+      <section  className={`feature-section ${isLogin? 'featurePageMargin':"" } `} >
         <div className="container">
           <div className="row">
             <div className="col-lg-3 col-sm-6">
@@ -128,6 +172,7 @@ const Home = () => {
                 <div className="icon">
                   <img src={icon01} alt="icon01" />
                 </div>
+                
                 <h4>100% Verifide</h4>
               </div>
             </div>
