@@ -1,5 +1,59 @@
+/* .header{
+    display: none;
+} */
 .login{
     height: 80vh !important;
-    padding-top: 70px;
     color: black;
 }
+
+
+.imagecontlogin{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 50%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+}
+.imglogin{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.log-reg-inner{
+    padding-top: 30px;
+    padding-bottom: 40px;
+    height: calc(100vh - 72px);
+    padding-right: 40px;
+    height: 100%;
+    overflow-y: auto;
+    
+}
+
+.loginarea{
+    height: 90vh;
+}
+
+.section-header{
+    text-align: center;
+    margin-bottom: 30px;
+    padding-top: 80px;
+}
+
+.my-form-control{
+    border: 1px solid rgba(59, 54, 140, 0.1);
+    background-color: rgb(234, 242, 252);
+    -webkit-box-shadow: 1.948px 13.864px 6px 0px rgb(220 234 251 / 30%);
+    box-shadow: 1.948px 13.864px 6px 0px rgb(220 234 251 / 30%);
+    font-size: 16px;
+    color: #3b368c;
+    padding: 0px 30px;
+    height: 60px;
+    border-radius: 2%;
+}
+
+

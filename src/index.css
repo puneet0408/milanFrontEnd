@@ -1,8 +1,11 @@
+html{
+  overflow-x: hidden;
+}
 body {
   margin: 0;
   padding: 0;
   font-size: 13px;
-  color: white;
+  color: #000;
   line-height: 25px;
   background-color: #fafbff;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -42,3 +45,69 @@ code {
   background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
 }
 
+
+li{
+  list-style-type: none;
+}
+
+.custom-button {
+    background-image: linear-gradient(166deg, rgb(242, 40, 118) 0%, rgb(148, 45, 217) 100%);
+    /* box-shadow: 0.872px 9.962px 20px 0px rgb(12 78 165 / 30%); */
+    padding: 11px 35px;
+    font-weight: 600;
+    color: #ffffff;
+    border-radius: 50px;
+    display: inline-block;
+    border: 0px;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+}
+
+
+.container{
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+textarea {
+  height: 200px;
+  resize: none;
+  padding: 10px;
+}
+
+select, input, textarea, button {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #2d4186;
+  outline: none;
+  border-radius: 4px;
+}
+textarea {
+  overflow: auto;
+}
+button, input, optgroup, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+
+input {
+  background: transparent;
+  border: 1px solid #2d4186;
+  padding-left: 10px;
+}
+input, button, select {
+  height: 50px;
+  color: #333333;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 57px;
+}

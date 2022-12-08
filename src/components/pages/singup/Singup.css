@@ -89,3 +89,27 @@
         padding: 15px 50px;
     }
 }
+
+
+ 
+.gender , .genders{
+    border: 1px solid rgba(59, 54, 140, 0.1);
+    background-color: rgb(234, 242, 252);
+    -webkit-box-shadow: 1.948px 13.864px 6px 0px rgb(220 234 251 / 30%);
+    box-shadow: 1.948px 13.864px 6px 0px rgb(220 234 251 / 30%);
+    -webkit-box-align: center;
+    width: 100%;
+    display: flex;
+    -ms-flex-align: center;
+    justify-content: space-evenly;
+    height: 60px;
+    border-radius: 5px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+}
+.error{
+    color: red;
+    text-transform: capitalize;
+      }
