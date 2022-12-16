@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import { AiFillFacebook } from 'react-icons/ai';
 import { motion } from "framer-motion"
-// import Man from "../../static/chats/";
-// import Women from "../../static/chats/woman.jpg";
- 
+
+import {login,logout} from "../../store/login/login"
+import { useSelector} from "react-redux";
  
 
 //Imports Images
@@ -37,7 +37,7 @@ import sucessp3 from "../../static/sucess/p3.png";
 
 const Home = () => {
 
-  const [isLogin,setIsLogin] = useState(true);
+  const isLogin = useSelector((state) => state.login.value);
 
 // const matchFind = ()=>{
 //   return(

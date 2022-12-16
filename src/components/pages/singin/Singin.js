@@ -1,8 +1,14 @@
 import { React, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import logImg from "../../../static/singup/log.jpg";
 import axios from "axios";
 import "./singin.css";
+import {login,logout} from "../../../store/login/login"
+import { useDispatch, useSelector } from "react-redux";
 const Singin = () => {
+  let isLogin = useSelector((state)=> state.login.value);
+  let navigate = useNavigate();
+  let dispatch = useDispatch();
   let [FormData, setFormData] = useState({
     username: "",
     password: "",
@@ -38,7 +44,7 @@ const Singin = () => {
     },
     data: FormData,
   };
-  const login = (event) => {
+  const handlesubmit = (event) => {
     event.preventDefault();
     axios(config)
       .then(function (response) {
@@ -47,6 +53,7 @@ const Singin = () => {
         localStorage.setItem("name", response.data.name);
         localStorage.setItem("role", response.data.role);
         localStorage.setItem("Chats", JSON.stringify(response.data.Chats));
+        dispatch(login());
       })
       .catch(function (error) {
         console.log(error);
@@ -79,7 +86,7 @@ const Singin = () => {
                 <h2 class="title">Welcome to milan</h2>
               </div>
               <div class="main-content inloginp">
-                <form action="#" onSubmit={login}>
+                <form onSubmit={handlesubmit}>
                   <div class="form-group">
                     <label for="">Your Username</label>
                     <input

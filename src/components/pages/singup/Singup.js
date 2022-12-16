@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const Singup = () => {
 
+    let [submitting,setSubmitting] = useState(false);
 
     const [signupForm, setFormData] = useState({
         username: "",
@@ -12,7 +13,7 @@ const Singup = () => {
         email: "",
         number: "",
         city: "",
-        encry_password: "",
+        password: "",
         dob: "",
         gender: "",
         Target_gender: "",
@@ -22,12 +23,7 @@ const Singup = () => {
    
     
     
-    //   const navigate = useNavigate();
-    
-    //   const [submitBtn, StSubmitBtn] = React.useState({
-    //     btnText: "sigin in",
-    //     disabled: false,
-    //   });
+      const navigate = useNavigate();
  
 
     const [error, setError] = useState({});
@@ -42,35 +38,26 @@ const Singup = () => {
       setError(validate(signupForm));
 
     }
-
-    // var config = {
-    //     method: "post",
-    //     url: "http://localhost:4000/backendapi/singUp",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     data: signupForm,
-    //   };
-    //   const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     axios(config)
-    //       .then(function (response) {
-    //         localStorage.setItem("id", response.data.id);
-    //         localStorage.setItem("token", response.data.token);
-    //         localStorage.setItem("name", response.data.name);
-    //         localStorage.setItem("role", response.data.role);
-    //         localStorage.setItem("Chats", JSON.stringify(response.data.Chats));
-    //         console.log(response);
-    //       })
-    //       .catch(function (error) {
-    //         console.log(error);
-    //       });
-    //   };
   
     const handleSubmit = (event) => {
            event.preventDefault();
-           
-           setIsSubmit(true)
+           console.log(signupForm);
+           var config = {
+            method: 'post',
+            url: 'http://localhost:4000/backendapi/singup',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            data : signupForm
+          };
+          
+          axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     }
   
     useEffect(() => {
@@ -94,9 +81,9 @@ const Singup = () => {
             error.email = "email is required";
         } else if (!regex.test(values.email)) {
             error.email = "this is not a valid format";
-        }else if (!(values.encry_password && values.confirm_password)) {
+        }else if (!(values.password && values.confirm_password)) {
             error.confirm_password = "password is required";
-            error.encry_password = "password is required";
+            error.password = "password is required";
           } else if (!values.name) {
             error.name = "name is required";
         } else if (values.name.length > 15) {
@@ -107,7 +94,7 @@ const Singup = () => {
         // } else if (!values.Target_gender){
         //     error.Target_gender = "Target_gender is required";
         // }
-       else if (values.encry_password !== values.confirm_password) {
+       else if (values.password !== values.confirm_password) {
             error.confirm_password = "password did'nt match";
         }
       return error;
@@ -151,7 +138,7 @@ const Singup = () => {
                                 <p className="error" >{error.email}</p>
                                 <div className="input-group mb-3">
                                     <label className="mb-2">Password*</label>
-                                    <input type="password" value={signupForm.encry_password} className="sing_my_control" placeholder="Enter Your Password" name="encry_password" onChange={handleChange}  />
+                                    <input type="password" value={signupForm.password} className="sing_my_control" placeholder="Enter Your Password" name="password" onChange={handleChange}  />
                                 </div>
                                 <p className="error" >{error.encry_password}</p>
                                 <div className="input-group mb-3">
@@ -175,14 +162,14 @@ const Singup = () => {
                                         className="sing_my_control" placeholder="mm/dd/yy" name="dob" onChange={handleChange}/>
                                 </div>
                                 <p className="error" >{error.dob}</p>
-                                <div className="form-group">
+                                <div className="form-group" >
                                     <label for="">I am a*</label>
                                     <div className="option genders ">
                                         <div className="s-input mr-3">
-                                            <input type="radio" name="gender" value={signupForm.gender} id="males1" /><label >Man</label>
+                                            <input type="radio" name="gender"  value="Male" id="males1" onChange={handleChange}/><label >Man</label>
                                         </div>
                                         <div className="s-input">
-                                            <input type="radio" name="gender" value={signupForm.gender} id="females1" /><label >Woman</label>
+                                            <input type="radio" name="gender" value="Female" onChange={handleChange} id="females1" /><label >Woman</label>
                                         </div>
                                     </div>
                                 </div>
@@ -191,10 +178,10 @@ const Singup = () => {
                                     <label for="">I am looking for*</label>
                                     <div className="option gender ">
                                         <div className="s-input mr-3">
-                                            <input type="radio" name="Target_gender" value={signupForm.Target_gender} id="males1" /><label >Man</label>
+                                            <input type="radio" name="Target_gender" value="Male" id="males1" onChange={handleChange} /><label >Man</label>
                                         </div>
                                         <div className="s-input">
-                                            <input type="radio" name="Target_gender" value={signupForm.Target_gender} id="females1" /><label >Woman</label>
+                                            <input type="radio" name="Target_gender" value="Female" id="females1" onChange={handleChange} /><label >Woman</label>
                                         </div>
                                     </div>
                                 </div>

@@ -6,6 +6,7 @@ import { GrAttachment } from "react-icons/gr";
 import { AiFillAudio } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import { GrClose } from "react-icons/gr";
+import {BiTimeFive} from "react-icons/bi"
 
 
 import "./Chatwindow.css";
@@ -51,6 +52,21 @@ let Chatwindow = () => {
     setOpnSerchBar(prev => !prev);
   }
 
+  //Print time in 12 hourt format
+  function ampmtime(date)
+  {
+      let res="";
+      let hr=date.getHours();
+      let mn=date.getMinutes();
+      let am=true;
+      if(hr>=12)
+      {
+        am=false;
+        hr=hr-12;
+      }
+      res=res+hr+":"+mn+(am?" AM":" PM");
+      return res;
+  }
 
 
 
@@ -81,6 +97,8 @@ let Chatwindow = () => {
 
   //Individual Chat Design
   const message = (msg) => {
+    let tm = msg.createdAt;
+    let date = new Date(tm);
     return (
       <div
         className={
@@ -94,7 +112,7 @@ let Chatwindow = () => {
         <div className="chat_text_contain">
           <div className="chat_individual_message_text">
             <p>{msg.data}</p>
-            <p>8:00 AM</p>
+            <p> <BiTimeFive/> {ampmtime(date)} </p>
           </div>
           <div className="chat_individual_message_cut"></div>
         </div>

@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "./profile.css";
 import Activity from "./subcomponents/activity";
 import BeforeLogin from "../../../static/beforeLogin/backgroundImg.jpg"
+import { useSelector } from "react-redux";
 const Profile = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  let isLogin = useSelector((state) => state.login.value);
 
   const navigate = useNavigate();
 

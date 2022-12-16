@@ -1,56 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProfileImg from "../../../../static/profile/profile.jpg";
 import feed1 from "../../../../static/profile/feeds/1.jpg";
 import feed2 from "../../../../static/profile/feeds/2.jpg";
 import feed3 from "../../../../static/profile/feeds/3.jpg";
 import feed4 from "../../../../static/profile/feeds/4.jpg";
 
+import axios from 'axios'
 
 function Activity() {
 
 
-    const feeds = [
-        {
-            id: 1,
-            discription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel porta felis.",
-            img: feed1,
-        },
-        {
-            id: 2,
-            discription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel porta felis.",
-            img: feed2,
-        },
-        {
-            id: 3,
-            discription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel porta felis.",
-            img: feed3,
-        },
-        {
-            id: 4,
-            discription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel porta felis.",
-            img: feed4,
-        }
-    ];
+    const [feeds,setFeeds] = useState([]);
+    let temp = 
+    {
+        id:localStorage.getItem('id'),
+        token:localStorage.getItem('token')
+    }
+    useEffect(()=> 
+    {
+        var config = {
+            method: 'post',
+            url: 'http://localhost:4000/backendapi/post/show',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            data : temp
+          };
+          
+          axios(config)
+          .then(function (response) {
+            setFeeds(response.data);
+            console.log(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    })
+   
+    let handlelike = (postid) => 
+    {
+        console.log("handle like");
+    }
 
-    const card = feeds.map((feed , index)=>{
+    const card = feeds.length!=0 && feeds.map((feed , index)=>{
         return(
             <div className="profile-single-post">
                 <div className="profileDetail" style={{ width:"50%", display:"flex",flexDrection:"row",color:"#000",alignItems:"center" , justifyContent:"space-between"}} >
                 <div className="profileImgContainer" style={{ height:"50px", width: "50px"}} >
                                         <img src={ProfileImg} style={{hwidth:"100%",objectFit:"cover", height:"100%"}} className="imgprofile" alt="profile"/>
                                     </div>
-                    <h3 className="name" >Puneet</h3>
-                    <p className="userName" >@pvirmani</p>
+                    <h3 className="name" >Admin</h3>
+                    <p className="userName" >@addmi23</p>
                     <p className="postTime" >.19h</p>
                 </div>
-                <p style={{paddingLeft: "60px", paddingTop: "23px" , color:"#000", width:"90%"}}>{feed.discription}</p>
+                <p style={{paddingLeft: "60px", paddingTop: "23px" , color:"#000", width:"90%"}}>{feed.post_text}</p>
                 <div className="feedImgCont" >
                 <img  style={{paddingLeft: "60px", paddingTop: "13px" , width:"100%"}} src={feed.img} className="feedImg" alt="feedimg"/>
                 </div>
                 <div class="p-s-p-content-footer">
                                 <div class="left">
-                                    <a href="#" class="comment" style={{color:"#000"}} >Comment</a>
-                                    <a href="#" class="link"><i class="far fa-star"></i></a>
+                                    <button onClick={handlelike}>Like</button>
                                 </div>
                             </div>
             </div>
@@ -73,7 +82,7 @@ function Activity() {
                                         6 days ago
                                     </p>
                                     <h4 class="title">
-                                        Easy Way to Dating
+                                        {localStorage.getItem('name')}
                                     </h4>
                                     <p class="text">
                                         Love for one another and love for

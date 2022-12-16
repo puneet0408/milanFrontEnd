@@ -180,9 +180,7 @@ let Chat = () => {
       dispatch(insert_new_messages(data.conversations));
       setReciver(rec);
     });
-    socket.emit("fetch_last_message", socketid[rec], "2");
-    // socket.emit('create_message','637b4e231a68c0c26f074a85','637b4de71a68c0c26f074a83','Hii Brother');
-    // socket.emit('unseen_message','637b47dc51126d4f5d350d78','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzN2I0N2RjNTExMjZkNGY1ZDM1MGQ3OCIsImlhdCI6MTY2OTI2NjAyOH0.w8-OpdEvMAf-zEM8762dph9l6c-_UFS94YYzQ3KRyKo');
+    socket.emit("fetch_last_message", socketid[rec], "0");
   };
 
   //Send New Message
@@ -244,7 +242,7 @@ let Chat = () => {
 
                 <h2 className="recents">Recent</h2>
 
-                <div className="userDetails">{chats.map(userDetails)}</div>
+                <div className="userDetails">{chats.length==0? "You don't Have Any Frind":chats.map(userDetails)}</div>
               </div>
 
               <div className="col-md-6 col-sm-12">
