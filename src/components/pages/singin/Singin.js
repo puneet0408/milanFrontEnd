@@ -1,12 +1,12 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logImg from "../../../static/singup/log.jpg";
 import axios from "axios";
 import "./singin.css";
-import {login,logout} from "../../../store/login/login"
+import { login } from "../../../store/login/login"
 import { useDispatch, useSelector } from "react-redux";
 const Singin = () => {
-  let isLogin = useSelector((state)=> state.login.value);
+  let isLogin = useSelector((state) => state.login.value);
   let navigate = useNavigate();
   let dispatch = useDispatch();
   let [FormData, setFormData] = useState({
@@ -24,14 +24,13 @@ const Singin = () => {
 
   const validate = (values) => {
     const error = {};
-    if (!values. username) {
+    if (!values.username) {
       error.username = "username is required";
     }
-
     else if (!(values.password)) {
       error.password = "password is required";
     }
-    
+
     return error;
   };
 
@@ -54,12 +53,14 @@ const Singin = () => {
         localStorage.setItem("role", response.data.role);
         localStorage.setItem("Chats", JSON.stringify(response.data.Chats));
         dispatch(login());
+        navigate("/");
       })
       .catch(function (error) {
         console.log(error);
       });
   };
   return (
+
     <div className="login">
       <div class="top-menu-area">
         <div class="container">

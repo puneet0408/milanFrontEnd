@@ -6,18 +6,13 @@ import BeforeLogin from "../../../static/beforeLogin/backgroundImg.jpg"
 import { useSelector } from "react-redux";
 const Profile = () => {
   let isLogin = useSelector((state) => state.login.value);
-
   const navigate = useNavigate();
-
   function navigateHome() {
     navigate("/");
   }
-
   function goToSignUpPage() {
     navigate("/singup");
   }
-
-
   return (
     <div>
       {isLogin ? (
@@ -61,11 +56,11 @@ const Profile = () => {
         </div>
       ) : (
         <div className="beforeLogin" >
-        <img className="BeforeLoginImg" src={BeforeLogin} alt="bgimg" />
-    
-        <button className="custom-button " onClick={goToSignUpPage} >Join Now</button>{" "}
-        
-      
+          <img className="BeforeLoginImg" src={BeforeLogin} alt="bgimg" />
+
+          <button className="custom-button " onClick={goToSignUpPage} >Join Now</button>{" "}
+
+
         </div>
       )}
     </div>

@@ -24,7 +24,7 @@ const Nav = () => {
                     <li><NavLink to="/membership">MEMBERSHIP</NavLink></li>
                     {/* <li><NavLink to="/life">LIFE</NavLink></li> */}
                    { isLogin && <li><NavLink to="/chat">CHAT</NavLink></li> }
-                    { isLogin? <li style={{color:"white"}} onClick={changeState} >SINGOUT</li>: <p>
+                    { isLogin? <li style={{color:"white"}} onClick={changeState} >logout</li>: <p>
                     <li><NavLink to="/singin">SINGIN</NavLink></li>
                     <li><NavLink to="/singup">SINGUP</NavLink></li></p>}
                     <li><NavLink to="/setting">SETTING</NavLink></li>

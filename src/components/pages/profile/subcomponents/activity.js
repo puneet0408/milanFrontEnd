@@ -35,7 +35,8 @@ function Activity() {
           .catch(function (error) {
             console.log(error);
           });
-    })
+          
+    },[])
    
     let handlelike = (postid) => 
     {

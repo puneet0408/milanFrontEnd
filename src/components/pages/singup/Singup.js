@@ -1,70 +1,73 @@
-import { React, useState , useEffect } from "react"
+import { React, useState, useEffect } from "react"
 import img from '../../../static/singup/formleft.jpg'
 import './Singup.css'
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const Singup = () => {
 
-    let [submitting,setSubmitting] = useState(false);
-
     const [signupForm, setFormData] = useState({
         username: "",
         name: "",
         email: "",
-        number: "",
         city: "",
         password: "",
         dob: "",
         gender: "",
         Target_gender: "",
-        password: "",
         confirm_password: "",
     });
-   
-    
-    
-      const navigate = useNavigate();
- 
+
+    const navigate = useNavigate();
+
+    const [submitBtn, StSubmitBtn] = useState({
+        btnText: "Create Account",
+        disabled: false,
+    });
+
+    const { btnText } = submitBtn;
 
     const [error, setError] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
-  
-    function handleChange(event) {
-      const { name, value } = event.target;
-      setFormData((prevInput) => ({
-        ...prevInput,
-        [name]: value,
-      }));
-      setError(validate(signupForm));
 
+    function handleChange(event) {
+        const { name, value } = event.target;
+        setFormData((prevInput) => ({
+            ...prevInput,
+            [name]: value,
+        }));
+        setError(validate(signupForm));
     }
-  
     const handleSubmit = (event) => {
-           event.preventDefault();
-           console.log(signupForm);
-           var config = {
+        event.preventDefault();
+        event.target.reset()
+        console.log(signupForm);
+        let data = JSON.stringify(signupForm);
+        var config = {
             method: 'post',
             url: 'http://localhost:4000/backendapi/singup',
-            headers: { 
-              'Content-Type': 'application/json'
+            headers: {
+                'Content-Type': 'application/json'
             },
-            data : signupForm
-          };
-          
-          axios(config)
-          .then(function (response) {
-            console.log(JSON.stringify(response.data));
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+            data: data,
+        };
+        axios(config)
+            .then(function (response) {
+                console.log(response.data.message);
+                setIsSubmit(true);
+                StSubmitBtn({btnText: "go to login page", disabled: false });
+                navigate("/singin");
+            })
+            .catch(function (error) {
+                console.log(error.response.message);
+                StSubmitBtn({ btnText: "error in creating" });
+            });
     }
-  
+
     useEffect(() => {
-      console.log(error);
-      if (Object.keys(error).length === 0 && isSubmit) {
-        setIsSubmit({ btnText: "submitting...", disabled: true });
-      }
+        console.log(error);
+        if (Object.keys(error).length === 0 && isSubmit) {
+            StSubmitBtn({btnText: "creating...", disabled: true });
+        }
     }, [error, isSubmit]);
 
 
@@ -75,29 +78,29 @@ const Singup = () => {
         //  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.]{6, 20}/;
         if (!values.username) {
             error.username = "userName is required";
-        }else if (values.username.length > 15) {
+        } else if (values.username.length > 15) {
             error.username = "Must be 15 characters or less";
         } else if (!values.email) {
             error.email = "email is required";
         } else if (!regex.test(values.email)) {
             error.email = "this is not a valid format";
-        }else if (!(values.password && values.confirm_password)) {
+        } else if (!(values.password && values.confirm_password)) {
             error.confirm_password = "password is required";
             error.password = "password is required";
-          } else if (!values.name) {
+        } else if (!values.name) {
             error.name = "name is required";
         } else if (values.name.length > 15) {
             error.name = "Must be 15 characters or less";
-         } 
-        //else if(!values.gender){
-        //     error.gender = "gender is required";
-        // } else if (!values.Target_gender){
-        //     error.Target_gender = "Target_gender is required";
-        // }
-       else if (values.password !== values.confirm_password) {
+        }
+        else if(!values.gender){
+            error.gender = "gender is required";
+        } else if (!values.Target_gender){
+            error.Target_gender = "Target_gender is required";
+        }
+        else if (values.password !== values.confirm_password) {
             error.confirm_password = "password did'nt match";
         }
-      return error;
+        return error;
 
     }
     return (
@@ -106,11 +109,11 @@ const Singup = () => {
                 <div className="row">
                     <div className="col-xl-5 col-lg-6  px-0">
                         <div className="image_sing">
-                            <img className="" src={img} />
+                            <img className="" alt="img" src={img} />
                         </div>
                     </div>
                     <div className="col-xl-7 col-lg-6 col-sm-12 px-5 py-3">
-                        <form  className="sing_form" onSubmit={handleSubmit} >
+                        <form className="sing_form" onSubmit={handleSubmit} >
                             <div className="sing_header">
                                 <h2>
                                     WELCOME TO MILAN
@@ -127,18 +130,18 @@ const Singup = () => {
                                     <label className="mb-2">Username*</label>
                                     <input type="text" value={signupForm.username}
                                         className="sing_my_control" placeholder="Enter Your Username"
-                                         onChange={handleChange} name="username" />
-                                        
+                                        onChange={handleChange} name="username" />
+
                                 </div>
-                        <p className="error" >{error.username}</p>
+                                <p className="error" >{error.username}</p>
                                 <div className="input-group mb-3">
                                     <label className="mb-2">email*</label>
-                                    <input type="text" value={signupForm.email} className="sing_my_control" placeholder="Enter Your email" onChange={handleChange}  name="email" />
+                                    <input type="email" value={signupForm.email} className="sing_my_control" placeholder="Enter Your email" onChange={handleChange} name="email" />
                                 </div>
                                 <p className="error" >{error.email}</p>
                                 <div className="input-group mb-3">
                                     <label className="mb-2">Password*</label>
-                                    <input type="password" value={signupForm.password} className="sing_my_control" placeholder="Enter Your Password" name="password" onChange={handleChange}  />
+                                    <input type="password" value={signupForm.password} className="sing_my_control" placeholder="Enter Your Password" name="password" onChange={handleChange} />
                                 </div>
                                 <p className="error" >{error.encry_password}</p>
                                 <div className="input-group mb-3">
@@ -153,46 +156,46 @@ const Singup = () => {
                                 </div>
                                 <div className="input-group mb-3">
                                     <label className="mb-2">name*</label>
-                                    <input type="text" value={signupForm.name} className="sing_my_control" placeholder="Enter Your Full Name" onChange={handleChange}  name="name" />
+                                    <input type="text" value={signupForm.name} className="sing_my_control" placeholder="Enter Your Full Name" onChange={handleChange} name="name" />
                                 </div>
                                 <p className="error" >{error.name}</p>
                                 <div className="input-group mb-3">
                                     <label className="mb-2">DOB*</label>
                                     <input type="date" value={signupForm.dob}
-                                        className="sing_my_control" placeholder="mm/dd/yy" name="dob" onChange={handleChange}/>
+                                        className="sing_my_control" placeholder="mm/dd/yy" name="dob" onChange={handleChange} />
                                 </div>
                                 <p className="error" >{error.dob}</p>
                                 <div className="form-group" >
-                                    <label for="">I am a*</label>
+                                    <label htmlFor="">I am a*</label>
                                     <div className="option genders ">
                                         <div className="s-input mr-3">
-                                            <input type="radio" name="gender"  value="Male" id="males1" onChange={handleChange}/><label >Man</label>
+                                            <input type="radio" name="gender" value="Male" id="males1" onChange={handleChange} /><label >Man</label>
                                         </div>
                                         <div className="s-input">
                                             <input type="radio" name="gender" value="Female" onChange={handleChange} id="females1" /><label >Woman</label>
                                         </div>
                                     </div>
                                 </div>
-                                {/* <p className="error" >{error.gender}</p> */}
+                                <p className="error" >{error.gender}</p>
                                 <div className="form-group">
-                                    <label for="">I am looking for*</label>
+                                    <label htmlFor="">I am looking for*</label>
                                     <div className="option gender ">
                                         <div className="s-input mr-3">
-                                            <input type="radio" name="Target_gender" value="Male" id="males1" onChange={handleChange} /><label >Man</label>
+                                            <input type="radio" name="Target_gender" value="Male" id="males2" onChange={handleChange} /><label >Man</label>
                                         </div>
                                         <div className="s-input">
-                                            <input type="radio" name="Target_gender" value="Female" id="females1" onChange={handleChange} /><label >Woman</label>
+                                            <input type="radio" name="Target_gender" value="Female" id="females2" onChange={handleChange} /><label >Woman</label>
                                         </div>
                                     </div>
                                 </div>
-                                {/* <p className="error" >{error.Target_gender}</p> */}
+                                <p className="error" >{error.Target_gender}</p>
                                 <div className="input-group mb-3">
                                     <label className="mb-2">City*</label>
                                     <input type="text" className="sing_my_control" placeholder="Enter Your City" name="city" onChange={handleChange} />
                                 </div>
                                 <p className="error" >{error.city}</p>
                             </div>
-                            <button type="submit" className="btn custom_btn acc_btn text-nowrap">Create Account</button>
+                            <button type="submit" className="btn custom_btn acc_btn text-nowrap">{btnText}</button>
                         </form>
                     </div>
                 </div>
